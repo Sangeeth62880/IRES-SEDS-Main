@@ -625,169 +625,119 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Team
+/*--------------------------------------------------------------
+# Team Horizontal Scroll Carousel
 --------------------------------------------------------------*/
-.team-row {
-  position: relative;
-  column-count: 3;
-  column-gap: 0;
+.team .team-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 20px;
+  padding: 10px 5px 20px 5px;
   width: 100%;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #ffc107 rgba(255, 255, 255, 0.08);
+}
+
+.team .team-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.team .team-row::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+}
+
+.team .team-row::-webkit-scrollbar-thumb {
+  background: #ffc107;
+  border-radius: 10px;
+}
+
+.team .team-row::-webkit-scrollbar-thumb:hover {
+  background: #e0a800;
 }
 
 .team .box {
+  flex: 0 0 280px;
+  width: 280px;
+  max-width: 280px;
+  scroll-snap-align: start;
   position: relative;
-  transform-style: preserve-3d;
   overflow: hidden;
-  display: inline-block;
-  place-items: center;
-  transform: translate(0, 0) rotateX(0deg) rotateY(0deg);
-  page-break-inside: avoid;
-  perspective: 512px;
-  transition: 0.3s ease-out;
+  border-radius: 12px;
+  padding: 0;
+  margin-bottom: 10px;
+  background: #111111;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.team .box:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 .team .box img {
-  height: 100%;
   width: 100%;
-  background-size: cover;
-  background-position-y: -1.5rem;
-  box-shadow: 0 4px 16px rgba(28, 28, 27, 0.2);
-  -webkit-transition: -webkit-transform 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: -webkit-transform 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition: transform 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  transition:
-    transform 1s cubic-bezier(0.19, 1, 0.22, 1) 0s,
-    -webkit-transform 1s cubic-bezier(0.19, 1, 0.22, 1) 0s;
-  -webkit-transform: scale(0.9);
-  transform: scale(0.9);
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  border-radius: 12px;
+  transition: transform 0.5s ease;
 }
 
 .team .box:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
-.team .box a {
+.team .box a.teamname {
   position: absolute;
-  top: 15rem;
+  bottom: 0;
+  left: 0;
   right: 0;
-  min-width: 40px;
-  padding: 0.25rem 0.75rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5rem;
-  background-color: #1c1c1b;
-  color: rgb(238, 229, 229);
+  width: 100%;
+  padding: 16px 12px 10px;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 40%, rgba(0, 0, 0, 0.95) 100%);
+  color: #ffffff;
   text-decoration: none;
   text-align: center;
-  -webkit-transition: -webkit-transform 0.6s cubic-bezier(0.88, 0, 0.2, 1);
-  transition: -webkit-transform 0.6s cubic-bezier(0.88, 0, 0.2, 1);
-  transition: transform 0.6s cubic-bezier(1, 0.24, 0.1, 1.46);
-  transition:
-    transform 0.6s cubic-bezier(1, 0.24, 0.1, 1.46),
-    -webkit-transform 0.6s cubic-bezier(1, 0.24, 0.1, 1.46);
-  will-change: transform;
+  box-sizing: border-box;
+  display: block;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
 }
 
-@media (max-width: 1199px) {
-  .team .box a {
-    top: 12rem;
-  }
+.team .box a.teamname b {
+  font-size: 1.05rem;
+  color: #ffffff;
+  display: inline-block;
 }
 
-@media (max-width: 991px) {
-  .team .box a {
-    top: 30rem;
-  }
-  .team .box:hover img {
-    transform: none;
-    transition: none;
-    -webkit-transition: none;
-    -webkit-transform: none;
-  }
+.team .box a.teamname small {
+  font-size: 0.85rem;
+  color: #ffc107;
+  display: inline-block;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {
-  .team .box a {
-    top: 22rem;
+  .team .box {
+    flex: 0 0 240px;
+    width: 240px;
+    max-width: 240px;
   }
-}
-
-@media screen and (max-width: 781px) {
-  .team-row {
-    column-count: 1;
+  .team .box a.teamname {
+    padding: 12px 8px 8px;
   }
-
-  .team .box:hover img {
-    transform: none;
-    transition: none;
+  .team .box a.teamname b {
+    font-size: 0.95rem;
   }
-}
-
-@media (max-width: 735px) {
-  .box > *:not(img) {
-    font-size: 12px;
-  }
-  .team .box:hover img {
-    transform: none;
-  }
-}
-
-@media (max-width: 540px) {
-  .team .box a {
-    top: 20rem;
-  }
-}
-
-@media (max-width: 482px) {
-  .team-row {
-    column-count: 1;
-  }
-  .team .box:hover img {
-    transform: none;
-  }
-  .team .box a {
-    top: 18rem;
-  }
-}
-
-@media (max-width: 440px) {
-  .team .box a {
-    top: 15rem;
-  }
-}
-
-@media (max-width: 385px) {
-  .team-row {
-    column-count: 1;
-  }
-
-  .box > *:not(img) {
-    font-size: 14px;
-  }
-  .team .box:hover img {
-    transform: none;
-  }
-
-  .team .box a {
-    top: 12rem;
-  }
-}
-
-@media (max-width: 311px) {
-  .team .box a {
-    top: 8rem;
-  }
-}
-
-@media (max-width: 311px) {
-  .team .box a {
-    top: 6rem;
-  }
-}
-
-@media (max-width: 233px) {
-  .team .box a {
-    top: 4rem;
+  .team .box a.teamname small {
+    font-size: 0.8rem;
   }
 }
 
